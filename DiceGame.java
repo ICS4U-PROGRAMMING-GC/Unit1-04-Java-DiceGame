@@ -18,8 +18,9 @@ public class DiceGame {
      * @param args Command line arguments.
      */
     public static void main(final String[] args) {
-        // Setup scanner and random generator
+        // Setup scanner
         Scanner scanner = new Scanner(System.in);
+        // Setup random
         Random random = new Random();
 
         // Game variables
@@ -33,15 +34,22 @@ public class DiceGame {
         while (guess != target) {
             System.out.print("Enter a number: ");
 
-            // Validate number input
+            // Check if input is not an integer
             if (!scanner.hasNextInt()) {
                 System.out.println("Please enter a valid number!");
                 scanner.next();
                 continue;
             }
 
-            // Read guess and count attempt
             guess = scanner.nextInt();
+
+            // Check if guess is out of range
+            if (guess < 1 || guess > 6) {
+                System.out.println("Invalid input! Must be between 1 and 6.");
+                continue;
+            }
+
+            // Valid guess made
             attempts++;
 
             // Hints
@@ -52,8 +60,8 @@ public class DiceGame {
             }
         }
 
-        //if guessed correctly 
-        System.out.println("Correct! Total guesses: "
+        // Win message
+        System.out.println("Correct guess and Total guesses: "
             + attempts);
 
         scanner.close();
